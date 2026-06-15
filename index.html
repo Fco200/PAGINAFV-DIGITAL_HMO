@@ -3,39 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FV DIGITAL | Inicio & Servicios Profesionales</title>
+    <title>FV DIGITAL | Agencia de Desarrollo Web y Estrategia</title>
     
-    <link rel="icon" href="fv_digital_logo.png.webp" type="image/webp">
+    <link class="favicon" rel="icon" href="fv_digital_logo.png.webp" type="image/webp">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      
-      // Reemplaza 'TU_ID_DE_PIXEL_AQUÍ' por tu número real al configurar Facebook Business
-      fbq('init', 'TU_ID_DE_PIXEL_AQUÍ'); 
-      fbq('track', 'PageView');
-    </script>
 
     <style>
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Segoe UI', sans-serif; 
             scroll-behavior: smooth;
         }
         
         :root { 
             --color-primario: #0071e3; 
+            --color-secundario: #00b4d8;
             --color-oscuro: #0a0f1d; 
+            --color-tarjeta: rgba(255, 255, 255, 0.03);
             --color-texto: #ffffff; 
             --color-gris: #b0b3b8; 
         }
@@ -43,9 +30,10 @@
         body { 
             background-color: var(--color-oscuro); 
             color: var(--color-texto); 
+            padding-top: 80px; /* Espacio para el menú fijo */
         }
 
-        /* BARRA DE NAVEGACIÓN (HEADER) */
+        /* 📱 BARRA DE NAVEGACIÓN ADAPTABLE */
         header { 
             position: fixed; 
             top: 0; 
@@ -65,18 +53,17 @@
             align-items: center; 
         }
         
-        /* LOGO VARIABLE CONFIGURADO */
         .logo-container { 
             display: flex; 
             align-items: center; 
             text-decoration: none; 
             color: white; 
-            gap: 10px;
+            gap: 12px;
         }
         
-        .logo-img {
-            height: 35px;
-            width: auto;
+        .logo-img { 
+            height: 40px; 
+            width: auto; 
             object-fit: contain;
         }
         
@@ -90,6 +77,7 @@
             color: var(--color-primario); 
         }
 
+        /* Menú de pestañas en Computadora */
         nav ul { 
             display: flex; 
             list-style: none; 
@@ -101,60 +89,77 @@
             text-decoration: none; 
             font-weight: 500; 
             font-size: 15px; 
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
         
         nav ul li a:hover, nav ul li a.active { 
             color: var(--color-primario); 
         }
 
-        /* 🏠 IMPACTANTE SECCIÓN HERO (BIENVENIDA) */
+        /* Botón de Menú Móvil (Hamburguesa) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* 🚀 SECCIÓN HERO DE BIENVENIDA */
         .hero { 
-            height: 100vh; 
+            min-height: calc(100vh - 80px); 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             text-align: center; 
-            padding: 0 20px; 
-            background: radial-gradient(circle at center, #14213d 0%, var(--color-oscuro) 70%); 
+            padding: 40px 20px; 
+            background: radial-gradient(circle at center, #14213d 0%, var(--color-oscuro) 75%); 
         }
         
         .hero-content h1 { 
-            font-size: 48px; 
+            font-size: 3rem; 
             line-height: 1.2; 
             margin-bottom: 20px; 
-            opacity: 0; 
-            animation: aparecer 1s ease-out forwards; 
+            font-weight: 800;
         }
         
         .hero-content h1 span { 
-            color: var(--color-primario); 
+            background: linear-gradient(45deg, var(--color-primario), var(--color-secundario));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .hero-content p { 
-            font-size: 18px; 
+            font-size: 1.2rem; 
             color: var(--color-gris); 
-            max-width: 600px; 
+            max-width: 650px; 
             margin: 0 auto 40px auto; 
-            opacity: 0; 
-            animation: aparecer 1s ease-out 0.3s forwards; 
+            line-height: 1.6;
         }
         
         .hero-buttons { 
             display: flex; 
             justify-content: center; 
             gap: 20px; 
-            opacity: 0; 
-            animation: aparecer 1s ease-out 0.6s forwards; 
+            flex-wrap: wrap;
         }
         
-        /* BOTONES ACCIÓN */
         .btn { 
-            padding: 12px 30px; 
-            border-radius: 25px; 
+            padding: 14px 32px; 
+            border-radius: 30px; 
             text-decoration: none; 
             font-weight: 600; 
-            transition: all 0.3s; 
+            transition: all 0.3s ease; 
         }
         
         .btn-p { 
@@ -165,103 +170,99 @@
         
         .btn-p:hover { 
             background: #005bb5; 
-            transform: scale(1.05); 
+            transform: translateY(-3px); 
         }
         
         .btn-s { 
             border: 2px solid var(--color-primario); 
-            color: var(--color-primario); 
+            color: white; 
         }
         
         .btn-s:hover { 
             background: var(--color-primario); 
-            color: white; 
+            transform: translateY(-3px);
         }
 
-        /* ℹ️ SECCIÓN INFO & SERVICIOS */
-        .container { 
-            max-width: 1100px; 
+        /* 🏛️ SECCIÓN DE ENFOQUE CENTRAL (RESUMEN DE MARCA) */
+        .features-section {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px; 
-            text-align: center; 
+            padding: 80px 20px;
+            text-align: center;
         }
-        
-        h2 { 
-            font-size: 36px; 
-            margin-bottom: 15px; 
+
+        .features-section h2 {
+            font-size: 2.3rem;
+            margin-bottom: 15px;
         }
-        
-        h2 span { 
-            color: var(--color-primario); 
+
+        .features-section h2 span {
+            color: var(--color-secundario);
         }
-        
-        .intro { 
-            color: var(--color-gris); 
-            max-width: 700px; 
-            margin: 0 auto 50px auto; 
-            font-size: 16px; 
+
+        .features-section .subtitle {
+            color: var(--color-gris);
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+            font-size: 1.1rem;
             line-height: 1.6;
         }
 
-        .grid-servicios { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 30px; 
-            margin-top: 20px; 
-        }
-        
-        .card { 
-            background: rgba(255, 255, 255, 0.03); 
-            padding: 35px 25px; 
-            border-radius: 12px; 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; 
-        }
-        
-        .card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--color-primario); 
-            box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2); 
-        }
-        
-        .card i { 
-            font-size: 40px; 
-            color: var(--color-primario); 
-            margin-bottom: 20px; 
-        }
-        
-        .card h3 { 
-            font-size: 20px; 
-            margin-bottom: 12px; 
-        }
-        
-        .card p { 
-            color: var(--color-gris); 
-            font-size: 14px; 
-            line-height: 1.6; 
+        /* Cuadrícula de accesos directos rápidos */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
-        /* SECCIÓN CENTRAL DEL LOGO DEL CUERPO */
-        .brand-logo-display {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
+        .feature-card {
+            background: var(--color-tarjeta);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px 25px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-primario);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card i {
+            font-size: 35px;
+            color: var(--color-primario);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--color-gris);
+            font-size: 14.5px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .feature-card .card-link {
+            color: var(--color-secundario);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
             align-items: center;
-            padding: 20px 0;
+            gap: 5px;
         }
 
-        .brand-logo-display img {
-            width: 140px; 
-            height: auto;
-            opacity: 0.8;
-            transition: opacity 0.3s;
+        .feature-card .card-link:hover {
+            text-decoration: underline;
         }
 
-        .brand-logo-display img:hover {
-            opacity: 1;
-        }
-
-        /* 💬 BOTÓN FLOTANTE DE WHATSAPP */
+        /* 💬 WHATSAPP FLOTANTE */
         .whatsapp-flotante {
             position: fixed;
             bottom: 25px;
@@ -283,13 +284,48 @@
 
         .whatsapp-flotante:hover {
             transform: scale(1.1) rotate(10deg);
-            background-color: #1ebd59;
         }
 
-        /* ANIMACIONES EN KEYFRAMES */
-        @keyframes aparecer { 
-            from { opacity: 0; transform: translateY(20px); } 
-            to { opacity: 1; transform: translateY(0); } 
+        /* 🎛️ MEDIA QUERIES (REGLAS ADAPTABLES PARA MÓVILES) */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex; /* Muestra el botón hamburguesa */
+            }
+
+            /* Transformar el menú en un panel desplegable de pantalla completa en celulares */
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(10, 15, 29, 0.98);
+                width: 100%;
+                height: calc(100vh - 80px);
+                text-align: center;
+                padding-top: 40px;
+                gap: 30px;
+                transition: left 0.4s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            /* Mostrar menú cuando esté activo */
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li a {
+                font-size: 20px;
+                display: block;
+            }
+
+            /* Ajustes del tamaño de texto del Hero en pantallas chicas */
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -298,16 +334,25 @@
     <header>
         <div class="navbar">
             <a href="index.html" class="logo-container">
-                <img src="fv_digital_logo.png.webp" alt="FV Digital Logo" class="logo-img">
+                <img src="fv_digital_logo.png.webp" alt="Logo FV DIGITAL" class="logo-img">
                 <div class="logo-text">FV <span>DIGITAL</span></div>
             </a>
+            
+            <button class="menu-toggle" id="mobile-menu" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav>
-                <ul>
+                <ul id="nav-list">
                     <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="info.html">Info</a></li>
-                    <li><a href="portfolio.html">Portafolio</a></li> <li><a href="cotizacion.html">Cotización</a></li>
+                    <li><a href="info.html">Servicios</a></li>
+                    <li><a href="portfolio.html">Portafolio</a></li>
+                    <li><a href="cotizacion.html">Cotización</a></li>
                     <li><a href="soporte.html">Soporte</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
                 </ul>
             </nav>
         </div>
@@ -315,51 +360,61 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Impulsamos tu Presencia <br><span>Digital al Máximo</span></h1>
-            <p>Creamos estrategias, páginas web de alta conversión y soluciones de marketing profesional para que tu marca destaque.</p>
+            <h1>Desarrollo Web de Élite e <br><span>Impacto Digital</span></h1>
+            <p>Diseñamos plataformas a la medida, automatizaciones complejas y estrategias de marketing de alta conversión para acelerar el crecimiento de tu marca.</p>
             <div class="hero-buttons">
-                <a href="cotizacion.html" class="btn btn-p">Cotizar Proyecto</a>
-                <a href="servicios.html" class="btn btn-s">Ver Servicios</a>
+                <a href="cotizacion.html" class="btn btn-p">Iniciar una Cotización</a>
+                <a href="portfolio.html" class="btn btn-s">Explorar Portafolio</a>
             </div>
         </div>
     </section>
 
-    <main class="container" id="servicios">
-        <h2>Sobre <span>FV DIGITAL</span></h2>
-        <p class="intro">Somos especialistas en el desarrollo y optimización de marcas en el ecosistema digital. Diseñamos soluciones a la medida de tus necesidades con tecnología moderna.</p>
+    <main class="features-section">
+        <h2>Soluciones <span>Especializadas</span></h2>
+        <p class="subtitle">Explora los diferentes pilares de nuestro ecosistema digital diseñados para ofrecerte rendimiento técnico, soporte y ventas en automático.</p>
         
-        <div class="grid-servicios">
-            <div class="card">
-                <i class="fas fa-code"></i>
-                <h3>Desarrollo Web</h3>
-                <p>Páginas web a medida, tiendas virtuales avanzadas y estructuras optimizadas para dispositivos móviles.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-bullhorn"></i>
-                <h3>Marketing Digital</h3>
-                <p>Estrategias personalizadas para potenciar tu presencia en Facebook, Instagram y conversión directa de clientes.</p>
-            </div>
-            
-            <div class="brand-logo-display">
-                <img src="fv_digital_logo.png.webp" alt="Logo FV DIGITAL central">
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-cubes"></i>
+                <h3>Nuestros Servicios</h3>
+                <p>Descubre nuestro catálogo completo: desarrollo e-commerce, landing pages efectivas y optimización de velocidad.</p>
+                <a href="info.html" class="card-link">Ver catálogo de servicios <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <div class="card">
-                <i class="fas fa-chart-line"></i>
-                <h3>Optimización SEO</h3>
-                <p>Posicionamos tu sitio web en los primeros resultados de los motores de búsqueda para multiplicar tus visitas.</p>
+            <div class="feature-card">
+                <i class="fas fa-folder-open"></i>
+                <h3>Casos de Éxito</h3>
+                <p>Echa un vistazo a los sistemas interactivos y portales web que hemos desplegado para nuestros clientes más destacados.</p>
+                <a href="portfolio.html" class="card-link">Ver portafolio <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="card">
-                <i class="fas fa-cogs"></i>
-                <h3>Mantenimiento Web</h3>
-                <p>Actualizaciones, seguridad y soporte técnico continuo para que tu sitio web siempre funcione al máximo.</p>
+
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h3>Soporte Técnico</h3>
+                <p>¿Tienes dudas o necesitas un mantenimiento urgente? Accede a nuestro centro de atención técnica prioritaria.</p>
+                <a href="soporte.html" class="card-link">Ir a Soporte <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </main>
 
-    <a href="https://wa.me/526625374491" class="whatsapp-flotante" target="_blank">
+    <a href="https://wa.me/521234567890" class="whatsapp-flotante" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            // Activa o desactiva la clase en la lista del menú
+            navList.classList.toggle('active');
+            
+            // Animación visual del botón hamburguesa
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            spans[0].style.transform = navList.classList.contains('active') ? 'rotate(45deg) translate(5px, 5px)' : 'none';
+            spans[1].style.opacity = navList.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = navList.classList.contains('active') ? 'rotate(-45deg) translate(6px, -6px)' : 'none';
+        });
+    </script>
 </body>
 </html>
