@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | FV DIGITAL - Desarrollo y Estrategia</title>
+    
+    <link rel="icon" href="fv_digital_logo.png.webp" type="image/webp">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        
+        :root { 
+            --color-primario: #0071e3; 
+            --color-secundario: #00b4d8;
+            --color-oscuro: #0a0f1d; 
+            --color-tarjeta: rgba(255, 255, 255, 0.03);
+            --color-texto: #ffffff; 
+            --color-gris: #b0b3b8; 
+            --transicion: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        body { 
+            background-color: var(--color-oscuro); 
+            color: var(--color-texto); 
+            padding-top: 100px;
+            overflow-x: hidden;
+        }
+
+        /* BARRA DE NAVEGACIÓN (HEADER) */
+        header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            background: rgba(10, 15, 29, 0.95); 
+            backdrop-filter: blur(10px); 
+            z-index: 1000; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        
+        .navbar { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+            color: white; 
+            gap: 10px;
+        }
+        
+        .logo-img { height: 35px; width: auto; }
+        .logo-text { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+        .logo-text span { color: var(--color-primario); }
+
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { 
+            color: var(--color-gris); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 15px; 
+            transition: color 0.3s;
+        }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primario); }
+
+        /* TÍTULO PRINCIPAL CON EFECTO DEGRADADO */
+        .header-section {
+            text-align: center;
+            padding: 60px 20px 20px 20px;
+        }
+
+        .header-section h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, var(--color-secundario));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-section p {
+            color: var(--color-gris);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        /* 🎛️ FILTROS INTERACTIVOS (JS) */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px auto;
+            flex-wrap: wrap;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-texto);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transicion);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--color-primario);
+            border-color: var(--color-primario);
+            box-shadow: 0 5px 15px rgba(0, 113, 227, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ⚡ CUADRÍCULA DE SERVICIOS CON ANIMACIÓN CSS */
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--color-tarjeta);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            transition: var(--transicion);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animación al pasar el mouse (Hover) */
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--color-secundario);
+            box-shadow: 0 15px 30px rgba(0, 180, 216, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Efecto de línea brillante superior */
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-secundario), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 113, 227, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: var(--transicion);
+        }
+
+        .service-card:hover .icon-box {
+            background: var(--color-primario);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .icon-box i {
+            font-size: 32px;
+            color: var(--color-secundario);
+            transition: var(--transicion);
+        }
+
+        .service-card:hover .icon-box i {
+            color: #ffffff;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--color-gris);
+            font-size: 14.5px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        /* Etiquetas técnicas */
+        .tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tags span {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-secundario);
+            text-transform: uppercase;
+        }
+
+        /* Ocultar elementos para el filtro por JS */
+        .service-card.hide {
+            display: none;
+        }
+
+        /* 🧮 CALCULADORA DE PRESUPUESTOS (INTERACTIVA CON JS) */
+        .calculator-section {
+            max-width: 800px;
+            margin: 80px auto;
+            background: radial-gradient(circle at top left, rgba(0, 113, 227, 0.05), transparent);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .calculator-section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        @media(max-width: 600px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .calc-group label {
+            font-size: 14px;
+            color: var(--color-gris);
+            font-weight: 500;
+        }
+
+        .calc-group select {
+            background: #121829;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .price-display {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 113, 227, 0.1);
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .price-display span {
+            color: var(--color-secundario);
+        }
+
+        /* 💬 WHATSAPP FLOTANTE */
+        .whatsapp-flotante {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 9999;
+            transition: var(--transicion);
+            text-decoration: none;
+        }
+
+        .whatsapp-flotante:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo-container">
+                <img src="fv_digital_logo.png.webp" alt="FV Digital Logo" class="logo-img">
+                <div class="logo-text">FV <span>DIGITAL</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="info.html" class="active">Servicios</a></li>
+                    <li><a href="portfolio.html">Portafolio</a></li>
+                    <li><a href="cotizacion.html">Cotización</a></li>
+                    <li><a href="soporte.html">Soporte</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="header-section">
+        <h1>Soluciones Digitales a la Medida</h1>
+        <p>Diseñamos y desarrollamos todo tipo de plataformas de software y ecosistemas web con la tecnología más veloz del mercado.</p>
+    </section>
+
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">Todos los proyectos</button>
+        <button class="filter-btn" data-filter="web">Desarrollo Web</button>
+        <button class="filter-btn" data-filter="marketing">Marketing & SEO</button>
+        <button class="filter-btn" data-filter="sistemas">Sistemas Complejos</button>
+    </div>
+
+    <main class="services-grid">
+        
+        <div class="service-card" data-category="web">
+            <div class="icon-box">
+                <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>Páginas Web Corporativas</h3>
+            <p>Estructuras web de presentación premium para empresas, marcas personales y consultorías. Enfocadas en captación de leads y confianza inmediata.</p>
+            <div class="tech-tags">
+                <span>HTML5</span><span>CSS3</span><span>UI/UX</span>
+            </div>
+        </div>
+
+        <div class="service-card" data-category="web">
+            <div class="icon-box">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>Tiendas Virtuales (E-commerce)</h3>
+            <p>Plataformas de venta automatizadas, con pasarelas de pago (Stripe, PayPal, MercadoPago), carritos avanzados y control total de inventarios.</p>
+            <div class="tech-tags">
+                <span>WooCommerce</span><span>Shopify</span><span>Stripe</span>
+            </div>
+        </div>
+
+        <div class="service-card" data-category="marketing">
+            <div class="icon-box">
+                <i class="fas fa-bullseye"></i>
+            </div>
+            <h3>Landing Pages de Alta Conversión</h3>
+            <p>Páginas de aterrizaje de un solo objetivo, optimizadas meticulosamente para campañas publicitarias de Facebook Ads y Google Ads.</p>
+            <div class="tech-tags">
+                <span>Conversión</span><span>Facebook Pixel</span><span>Copywriting</span>
+            </div>
+        </div>
+
+        <div class="service-card" data-category="marketing">
+            <div class="icon-box">
+                <i class="fas fa-search-dollar"></i>
+            </div>
+            <h3>Posicionamiento SEO Profesional</h3>
+            <p>Auditoría de palabras clave y optimización técnica interna para posicionar tu negocio de manera orgánica en los primeros resultados de Google.</p>
+            <div class="tech-tags">
+                <span>Google Index</span><span>Keywords</span><span>Analytics</span>
+            </div>
+        </div>
+
+        <div class="service-card" data-category="sistemas">
+            <div class="icon-box">
+                <i class="fas fa-layer-group"></i>
+            </div>
+            <h3>Aplicaciones y Sistemas Web</h3>
+            <p>Plataformas personalizadas internas (CRM, paneles de administración, control de usuarios y automatizaciones de flujos de trabajo de alta ingeniería).</p>
+            <div class="tech-tags">
+                <span>JavaScript v8</span><span>Bases de Datos</span><span>API Rest</span>
+            </div>
+        </div>
+
+        <div class="service-card" data-category="sistemas">
+            <div class="icon-box">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Soporte y Ciberseguridad</h3>
+            <p>Monitoreo constante, limpieza de malware, actualizaciones críticas semanales y migraciones seguras sin pérdida de correos o información.</p>
+            <div class="tech-tags">
+                <span>SSL</span><span>Backups</span><span>Optimización</span>
+            </div>
+        </div>
+
+    </main>
+
+    <section class="calculator-section">
+        <h2>Simulador de Presupuesto Estimado</h2>
+        <p>Selecciona las características básicas que necesitas para obtener una cotización base instantánea.</p>
+        
+        <div class="calc-grid">
+            <div class="calc-group">
+                <label for="tipo-proyecto">Tipo de Desarrollo:</label>
+                <select id="tipo-proyecto">
+                    <option value="5000">Landing Page Comercial ($5,000 MXN)</option>
+                    <option value="9000">Web Corporativa Completa ($9,000 MXN)</option>
+                    <option value="15000">Tienda Virtual Avanzada ($15,000 MXN)</option>
+                    <option value="25000">Sistema / App Web a Medida ($25,000 MXN)</option>
+                </select>
+            </div>
+            <div class="calc-group">
+                <label for="extras">Integraciones Adicionales:</label>
+                <select id="extras">
+                    <option value="0">Ninguna extra ($0)</option>
+                    <option value="1500">Configuración Píxel + Conversión (+ $1,500 MXN)</option>
+                    <option value="3000">SEO Inicial Avanzado (+ $3,000 MXN)</option>
+                    <option value="4000">Ambas Opciones Integradas (+ $4,000 MXN)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="price-display">
+            Inversión Estimada: <span id="total-price">$5,000 MXN</span>
+        </div>
+    </section>
+
+    <a href="https://wa.me/521234567890" class="whatsapp-flotante" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // 1. FUNCIONALIDAD DEL FILTRO DE CATEGORÍAS
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Cambiar estado activo de botones
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                // Filtrar las tarjetas con animación fluida
+                serviceCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (filterValue === 'all' || cardCategory === filterValue) {
+                        card.classList.remove('hide');
+                    } else {
+                        card.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        // 2. FUNCIONALIDAD DEL CALCULADOR DE PRESUPUESTO
+        const tipoProyecto = document.getElementById('tipo-proyecto');
+        const extras = document.getElementById('extras');
+        const totalPriceDisplay = document.getElementById('total-price');
+
+        function calcularPresupuesto() {
+            const costoBase = parseInt(tipoProyecto.value);
+            const costoExtras = parseInt(extras.value);
+            const total = costoBase + costoExtras;
+            
+            // Formatear a moneda mexicana
+            totalPriceDisplay.textContent = `$${total.toLocaleString('es-MX')} MXN`;
+        }
+
+        tipoProyecto.addEventListener('change', calcularPresupuesto);
+        extras.addEventListener('change', calcularPresupuesto);
+    </script>
+
+</body>
+</html>

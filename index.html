@@ -3,22 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FV DIGITAL | Agencia Creativa</title>
-        <link rel="icon" href="fv_digital_logo.png.webp" type="image/png">
-
-    <link rel="stylesheet" href="css/styles.css">
+    <title>FV DIGITAL | Inicio & Servicios Profesionales</title>
+    
+    <link rel="icon" href="fv_digital_logo.png.webp" type="image/webp">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      
+      // Reemplaza 'TU_ID_DE_PIXEL_AQUÍ' por tu número real al configurar Facebook Business
+      fbq('init', 'TU_ID_DE_PIXEL_AQUÍ'); 
+      fbq('track', 'PageView');
+    </script>
+
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            scroll-behavior: smooth;
+        }
+        
+        :root { 
+            --color-primario: #0071e3; 
+            --color-oscuro: #0a0f1d; 
+            --color-texto: #ffffff; 
+            --color-gris: #b0b3b8; 
+        }
+        
+        body { 
+            background-color: var(--color-oscuro); 
+            color: var(--color-texto); 
+        }
+
+        /* BARRA DE NAVEGACIÓN (HEADER) */
+        header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            background: rgba(10, 15, 29, 0.95); 
+            backdrop-filter: blur(10px); 
+            z-index: 1000; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        
+        .navbar { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        /* LOGO VARIABLE CONFIGURADO */
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+            color: white; 
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 35px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .logo-text { 
+            font-size: 22px; 
+            font-weight: bold; 
+            letter-spacing: 1px; 
+        }
+        
+        .logo-text span { 
+            color: var(--color-primario); 
+        }
+
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 20px; 
+        }
+        
+        nav ul li a { 
+            color: var(--color-gris); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 15px; 
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover, nav ul li a.active { 
+            color: var(--color-primario); 
+        }
+
+        /* 🏠 IMPACTANTE SECCIÓN HERO (BIENVENIDA) */
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 0 20px; 
+            background: radial-gradient(circle at center, #14213d 0%, var(--color-oscuro) 70%); 
+        }
+        
+        .hero-content h1 { 
+            font-size: 48px; 
+            line-height: 1.2; 
+            margin-bottom: 20px; 
+            opacity: 0; 
+            animation: aparecer 1s ease-out forwards; 
+        }
+        
+        .hero-content h1 span { 
+            color: var(--color-primario); 
+        }
+        
+        .hero-content p { 
+            font-size: 18px; 
+            color: var(--color-gris); 
+            max-width: 600px; 
+            margin: 0 auto 40px auto; 
+            opacity: 0; 
+            animation: aparecer 1s ease-out 0.3s forwards; 
+        }
+        
+        .hero-buttons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            opacity: 0; 
+            animation: aparecer 1s ease-out 0.6s forwards; 
+        }
+        
+        /* BOTONES ACCIÓN */
+        .btn { 
+            padding: 12px 30px; 
+            border-radius: 25px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: all 0.3s; 
+        }
+        
+        .btn-p { 
+            background: var(--color-primario); 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.4); 
+        }
+        
+        .btn-p:hover { 
+            background: #005bb5; 
+            transform: scale(1.05); 
+        }
+        
+        .btn-s { 
+            border: 2px solid var(--color-primario); 
+            color: var(--color-primario); 
+        }
+        
+        .btn-s:hover { 
+            background: var(--color-primario); 
+            color: white; 
+        }
+
+        /* ℹ️ SECCIÓN INFO & SERVICIOS */
+        .container { 
+            max-width: 1100px; 
+            margin: 0 auto;
+            padding: 100px 20px; 
+            text-align: center; 
+        }
+        
+        h2 { 
+            font-size: 36px; 
+            margin-bottom: 15px; 
+        }
+        
+        h2 span { 
+            color: var(--color-primario); 
+        }
+        
+        .intro { 
+            color: var(--color-gris); 
+            max-width: 700px; 
+            margin: 0 auto 50px auto; 
+            font-size: 16px; 
+            line-height: 1.6;
+        }
+
+        .grid-servicios { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 30px; 
+            margin-top: 20px; 
+        }
+        
+        .card { 
+            background: rgba(255, 255, 255, 0.03); 
+            padding: 35px 25px; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; 
+        }
+        
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--color-primario); 
+            box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2); 
+        }
+        
+        .card i { 
+            font-size: 40px; 
+            color: var(--color-primario); 
+            margin-bottom: 20px; 
+        }
+        
+        .card h3 { 
+            font-size: 20px; 
+            margin-bottom: 12px; 
+        }
+        
+        .card p { 
+            color: var(--color-gris); 
+            font-size: 14px; 
+            line-height: 1.6; 
+        }
+
+        /* SECCIÓN CENTRAL DEL LOGO DEL CUERPO */
+        .brand-logo-display {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .brand-logo-display img {
+            width: 140px; 
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .brand-logo-display img:hover {
+            opacity: 1;
+        }
+
+        /* 💬 BOTÓN FLOTANTE DE WHATSAPP */
+        .whatsapp-flotante {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-flotante:hover {
+            transform: scale(1.1) rotate(10deg);
+            background-color: #1ebd59;
+        }
+
+        /* ANIMACIONES EN KEYFRAMES */
+        @keyframes aparecer { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+    </style>
 </head>
 <body>
 
     <header>
         <div class="navbar">
-            <div class="logo">FV <span>DIGITAL</span></div>
+            <a href="index.html" class="logo-container">
+                <img src="fv_digital_logo.png.webp" alt="FV Digital Logo" class="logo-img">
+                <div class="logo-text">FV <span>DIGITAL</span></div>
+            </a>
             <nav>
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="info.html">Info</a></li>
-                    <li><a href="cotizacion.html">Cotización</a></li>
+                    <li><a href="portfolio.html">Portafolio</a></li> <li><a href="cotizacion.html">Cotización</a></li>
                     <li><a href="soporte.html">Soporte</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
                 </ul>
@@ -26,22 +313,53 @@
         </div>
     </header>
 
-    <main id="home" class="hero-section">
+    <section class="hero">
         <div class="hero-content">
-            <h1 class="fade-in">Impulsamos tu Presencia <br><span>Digital al Máximo</span></h1>
-            <p class="fade-in-delayed">Creamos estrategias, páginas web y soluciones profesionales para que tu marca destaque en redes y motores de búsqueda.</p>
-            <div class="hero-buttons fade-in-delayed">
-                <a href="cotizacion.html" class="btn-primary">Cotizar Proyecto</a>
-                <a href="info.html" class="btn-secondary">Saber Más</a>
+            <h1>Impulsamos tu Presencia <br><span>Digital al Máximo</span></h1>
+            <p>Creamos estrategias, páginas web de alta conversión y soluciones de marketing profesional para que tu marca destaque.</p>
+            <div class="hero-buttons">
+                <a href="cotizacion.html" class="btn btn-p">Cotizar Proyecto</a>
+                <a href="servicios.html" class="btn btn-s">Ver Servicios</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container" id="servicios">
+        <h2>Sobre <span>FV DIGITAL</span></h2>
+        <p class="intro">Somos especialistas en el desarrollo y optimización de marcas en el ecosistema digital. Diseñamos soluciones a la medida de tus necesidades con tecnología moderna.</p>
+        
+        <div class="grid-servicios">
+            <div class="card">
+                <i class="fas fa-code"></i>
+                <h3>Desarrollo Web</h3>
+                <p>Páginas web a medida, tiendas virtuales avanzadas y estructuras optimizadas para dispositivos móviles.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Marketing Digital</h3>
+                <p>Estrategias personalizadas para potenciar tu presencia en Facebook, Instagram y conversión directa de clientes.</p>
+            </div>
+            
+            <div class="brand-logo-display">
+                <img src="fv_digital_logo.png.webp" alt="Logo FV DIGITAL central">
+            </div>
+
+            <div class="card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Optimización SEO</h3>
+                <p>Posicionamos tu sitio web en los primeros resultados de los motores de búsqueda para multiplicar tus visitas.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-cogs"></i>
+                <h3>Mantenimiento Web</h3>
+                <p>Actualizaciones, seguridad y soporte técnico continuo para que tu sitio web siempre funcione al máximo.</p>
             </div>
         </div>
     </main>
 
-    <section id="info" style="padding: 100px 20px; text-align: center; background: #f9f9f9;">
-        <h2>Sección Info</h2>
-        <p>Próximamente el contenido especializado de FV DIGITAL.</p>
-    </section>
+    <a href="https://wa.me/526625374491" class="whatsapp-flotante" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <script src="js/script.js"></script>
 </body>
 </html>
