@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FV DIGITAL | Contacto</title>
+    <link rel="icon" href="fv_digital_logo.png.webp" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        :root { --color-primario: #0071e3; --color-oscuro: #0a0f1d; --color-texto: #ffffff; --color-gris: #b0b3b8; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); padding-top: 100px; }
+
+        header { position: fixed; top: 0; width: 100%; background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .navbar { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; text-decoration: none; color: white; }
+        .logo-text { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+        .logo-text span { color: var(--color-primario); }
+
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { color: var(--color-gris); text-decoration: none; font-weight: 500; font-size: 15px; }
+        nav ul li a.active { color: var(--color-primario); }
+
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .info-contacto h2 { font-size: 32px; margin-bottom: 15px; }
+        .info-contacto p { color: var(--color-gris); margin-bottom: 30px; font-size: 15px; }
+        
+        .redes-sociales a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.05); color: white; border-radius: 50%; text-decoration: none; font-size: 18px; margin-right: 12px; transition: 0.3s; }
+        .redes-sociales a.fb:hover { background: #1877f2; transform: scale(1.1); }
+        .redes-sociales a.wa:hover { background: #25d366; transform: scale(1.1); }
+
+        form { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 14px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: #141d30; color: white; font-size: 15px; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--color-primario); }
+        
+        .btn-enviar { width: 100%; padding: 12px; background: var(--color-primario); color: white; border: none; border-radius: 25px; font-weight: 600; font-size: 15px; cursor: pointer; transition: 0.3s; }
+        .btn-enviar:hover { background: #005bb5; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo-container">
+                <div class="logo-text">FV <span>DIGITAL</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="info.html">Info</a></li>
+                    <li><a href="cotizacion.html">Cotización</a></li>
+                    <li><a href="soporte.html">Soporte</a></li>
+                    <li><a href="contacto.html" class="active">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="info-contacto">
+            <h2>¿Tienes un <span>Proyecto?</span></h2>
+            <p>Escríbenos directamente o búscanos en nuestras plataformas sociales. Estamos listos para ayudarte a crecer.</p>
+            <div class="redes-sociales">
+                <a href="https://www.facebook.com/profile.php?id=61590473347486" target="_blank" class="fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/526625374491" target="_blank" class="wa"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <form id="form-contacto">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" id="c-nombre" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+                <label>Mensaje</label>
+                <textarea id="c-mensaje" rows="4" required placeholder="¿En qué podemos ayudarte?"></textarea>
+            </div>
+            <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('form-contacto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nom = document.getElementById('c-nombre').value;
+            const msg = document.getElementById('c-mensaje').value;
+            // Abre WhatsApp con el mensaje estructurado de contacto
+            const texto = `Hola FV DIGITAL, mi nombre es ${nom}. ${msg}`;
+            window.open(`https://api.whatsapp.com/send?phone=526625374491&text=${encodeURIComponent(texto)}`, '_blank');
+        });
+    </script>
+</body>
+</html>

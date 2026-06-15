@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FV DIGITAL | Cotizador Profesional</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CONFIGURACIÓN GENERAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --color-primario: #0071e3;
+            /* Azul tecnológico */
+            --color-oscuro: #0a0f1d;
+            /* Fondo premium */
+            --color-texto: #ffffff;
+            --color-gris: #b0b3b8;
+        }
+
+        body {
+            background-color: var(--color-oscuro);
+            color: var(--color-texto);
+            padding-top: 40px;
+        }
+
+        /* BARRA DE NAVEGACIÓN SIMPLIFICADA */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(10, 15, 29, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--color-primario);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: var(--color-gris);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--color-primario);
+        }
+
+        /* SECCIÓN COTIZACIÓN */
+        .cotizacion-section {
+            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .cotizacion-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+            animation: aparecer 0.8s ease-out forwards;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--color-gris);
+            margin-bottom: 40px;
+            font-size: 15px;
+            animation: aparecer 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .cotizador-wrapper {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: aparecer 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #141d30;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--color-primario);
+        }
+
+        .checkbox-group {
+            background: #141d30;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: var(--color-primario);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #005bb5;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 113, 227, 0.6);
+        }
+
+        /* CAJA DE ÉXITO Y BOTONES DE SALIDA */
+        .success-box {
+            text-align: center;
+            display: none;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+
+        .envio-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-whatsapp,
+        .btn-email {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebd59;
+            transform: scale(1.03);
+        }
+
+        .btn-email {
+            background-color: #ea4335;
+            color: white;
+        }
+
+        .btn-email:hover {
+            background-color: #d33426;
+            transform: scale(1.03);
+        }
+
+        /* ANIMACIÓN ENTRADA */
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ESTILOS INTERNOS DE LA PLANTILLA DEL PDF (OCULTA EN WEB) */
+        .reporte-plantilla {
+            background: white;
+            color: #333;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+            border-radius: 8px;
+        }
+
+        .pdf-header {
+            text-align: center;
+            color: #0071e3;
+            margin-bottom: 20px;
+        }
+
+        .pdf-body p {
+            margin: 12px 0;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .pdf-total {
+            color: #2ecc71;
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .pdf-footer {
+            margin-top: 40px;
+            font-size: 11px;
+            color: #777;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">FV <span>DIGITAL</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="info.html">Info</a></li>
+                    <li><a href="cotizacion.html" style="color: var(--color-primario);">Cotización</a></li>
+                    <li><a href="soporte.html">Soporte</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="cotizacion-section">
+        <div class="container">
+            <h2>Cotizador de Proyectos Web</h2>
+            <p class="subtitle">Completa los campos para generar tu presupuesto en PDF y enviarlo a FV DIGITAL</p>
+
+            <div class="cotizador-wrapper">
+                <form id="form-cotizacion">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo / Empresa</label>
+                        <input type="text" id="nombre" required placeholder="Ej. Juan Pérez">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" required placeholder="Ej. juan@empresa.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo-web">Tipo de Proyecto Web</label>
+                        <select id="tipo-web" required>
+                            <option value="" disabled selected>Selecciona una opción...</option>
+                            <option value="Landing Page" data-precio="3000">Landing Page (Página única de aterrizaje) -
+                                $3,000 MXN</option>
+                            <option value="Web Corporativa" data-precio="7000">Web Corporativa (Multipágina profesional)
+                                - $7,000 MXN</option>
+                            <option value="E-commerce" data-precio="12000">Tienda Online / E-commerce completa - $12,000
+                                MXN</option>
+                            <option value="Sistema a Medida" data-precio="18000">Aplicación Web / Sistema a Medida -
+                                $18,000 MXN</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Características Adicionales</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" class="extra" value="Pasarela de Pagos" data-precio="2000">
+                                Pasarela de Pagos (+$2,000 MXN)</label>
+                            <label><input type="checkbox" class="extra" value="Soporte y Mantenimiento"
+                                    data-precio="1500"> Soporte y Mantenimiento mensual (+$1,500 MXN)</label>
+                            <label><input type="checkbox" class="extra" value="Optimización SEO Avanzada"
+                                    data-precio="1200"> Optimización SEO Avanzada (+$1,200 MXN)</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="btn-generar">Generar Reporte PDF</button>
+                </form>
+
+                <div id="reporte-pdf" class="reporte-plantilla" style="display: none;">
+                    <div class="pdf-header">
+                        <h3>FV DIGITAL</h3>
+                        <p>Reporte Estimado de Cotización</p>
+                    </div>
+                    <hr>
+                    <div class="pdf-body">
+                        <p><strong>Cliente:</strong> <span id="pdf-nombre"></span></p>
+                        <p><strong>Contacto:</strong> <span id="pdf-email"></span></p>
+                        <p><strong>Proyecto Seleccionado:</strong> <span id="pdf-tipo"></span></p>
+                        <p><strong>Adicionales:</strong> <span id="pdf-extras">Ninguno</span></p>
+                        <hr>
+                        <h4 class="pdf-total">Total Estimado: <span id="pdf-total-num">$0</span> USD</h4>
+                    </div>
+                    <div class="pdf-footer">
+                        <p>Este documento es una estimación automatizada provista por FV DIGITAL. Válido por 30 días.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="mensaje-exito" class="success-box">
+                    <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>¡Reporte PDF Generado con Éxito!</h3>
+                    <p style="color: var(--color-gris); margin-top: 10px;">Tu documento se ha descargado de forma
+                        automática. Ahora, envíanoslo por el medio que prefieras para agendar tu proyecto:</p>
+                    <div class="envio-buttons">
+                        <a href="#" id="send-whatsapp" target="_blank" class="btn-whatsapp"><i
+                                class="fab fa-whatsapp"></i> Enviar por WhatsApp</a>
+                        <a href="#" id="send-email" class="btn-email"><i class="fas fa-envelope"></i> Enviar por
+                            Correo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        // CONFIGURA AQUÍ TUS DATOS REALES DE CONTACTO
+        const CONFIG_FV = {
+            whatsapp_telefono: "526625374491", // Tu número con código de país sin espacios ni signos +
+            correo_destino: "Franciscoaguayo2005@gmail.com" // Tu correo de marca
+        };
+
+        const formCotizacion = document.getElementById('form-cotizacion');
+        const mensajeExito = document.getElementById('mensaje-exito');
+        const subtitle = document.querySelector('.subtitle');
+        const sectionTitle = document.querySelector('.cotizacion-section h2');
+
+        if (formCotizacion) {
+            formCotizacion.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // 1. Obtener valores seleccionados
+                const nombre = document.getElementById('nombre').value;
+                const email = document.getElementById('email').value;
+                const selectWeb = document.getElementById('tipo-web');
+                const tipoWebTexto = selectWeb.options[selectWeb.selectedIndex].text;
+                const precioBase = parseFloat(selectWeb.options[selectWeb.selectedIndex].getAttribute('data-precio'));
+
+                // 2. Calcular los extras seleccionados
+                let total = precioBase;
+                let extrasAgregados = [];
+                const checkboxes = document.querySelectorAll('.extra:checked');
+
+                checkboxes.forEach(cb => {
+                    total += parseFloat(cb.getAttribute('data-precio'));
+                    extrasAgregados.push(cb.value);
+                });
+
+                const extrasTexto = extrasAgregados.length > 0 ? extrasAgregados.join(', ') : 'Ninguno';
+
+                // 3. Rellenar plantilla del PDF
+                document.getElementById('pdf-nombre').innerText = nombre;
+                document.getElementById('pdf-email').innerText = email;
+                document.getElementById('pdf-tipo').innerText = tipoWebTexto;
+                document.getElementById('pdf-extras').innerText = extrasTexto;
+                document.getElementById('pdf-total-num').innerText = `$${total}`;
+
+                // 4. Preparar y descargar el archivo PDF
+                const elementoPDF = document.getElementById('reporte-pdf');
+                elementoPDF.style.display = 'block'; // Mostrar momentáneamente para la captura
+
+                const opcionesPdf = {
+                    margin: 12,
+                    filename: `Cotizacion_FV_Digital_${nombre.replace(/\s+/g, '_')}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                html2pdf().set(opcionesPdf).from(elementoPDF).save().then(() => {
+                    elementoPDF.style.display = 'none'; // Volver a ocultar en la interfaz web
+
+                    // 5. Transición visual limpia: ocultar formulario y mostrar éxito
+                    formCotizacion.style.display = 'none';
+                    sectionTitle.style.display = 'none';
+                    subtitle.style.display = 'none';
+                    mensajeExito.style.display = 'block';
+
+                    // 6. Activar botones hacia tus redes
+                    configurarCanalesContacto(nombre, tipoWebTexto, total);
+                });
+            });
+        }
+
+        function configurarCanalesContacto(cliente, servicio, totalEstimado) {
+            const mensajeBase = `¡Hola FV DIGITAL! Acabo de generar mi reporte de cotización en la web.\n\n*Cliente:* ${cliente}\n*Proyecto:* ${servicio}\n*Total Estimado:* $${totalEstimado} MXN\n\nAbajo adjunto mi PDF generado.`;
+
+            // Configurar enlace para WhatsApp API
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${CONFIG_FV.whatsapp_telefono}&text=${encodeURIComponent(mensajeBase)}`;
+            document.getElementById('send-whatsapp').setAttribute('href', whatsappUrl);
+
+            // Configurar enlace para Correo Electrónico
+            const mailtoUrl = `mailto:${CONFIG_FV.correo_destino}?subject=Nueva Cotización Web - ${cliente}&body=${encodeURIComponent(mensajeBase)}`;
+            document.getElementById('send-email').setAttribute('href', mailtoUrl);
+        }
+    </script>
+</body>
+
+</html>

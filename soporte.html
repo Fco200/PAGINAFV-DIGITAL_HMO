@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="fv_digital_logo.png.webp" type="image/png">
+    <title>FV DIGITAL | Soporte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        :root { --color-primario: #0071e3; --color-oscuro: #0a0f1d; --color-texto: #ffffff; --color-gris: #b0b3b8; }
+        body { background-color: var(--color-oscuro); color: var(--color-texto); padding-top: 100px; }
+
+        header { position: fixed; top: 0; width: 100%; background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .navbar { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; text-decoration: none; color: white; }
+        .logo-text { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+        .logo-text span { color: var(--color-primario); }
+
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { color: var(--color-gris); text-decoration: none; font-weight: 500; font-size: 15px; }
+        nav ul li a.active { color: var(--color-primario); }
+
+        .container { max-width: 750px; margin: 40px auto; padding: 0 20px; }
+        h2 { text-align: center; font-size: 32px; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: var(--color-gris); margin-bottom: 40px; }
+
+        /* ACORDEÓN INTERACTIVO */
+        .faq-item { background: rgba(255, 255, 255, 0.03); margin-bottom: 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; }
+        .faq-question { padding: 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; transition: background 0.3s; }
+        .faq-question:hover { background: rgba(255, 255, 255, 0.05); }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; color: var(--color-gris); font-size: 15px; line-height: 1.6; }
+        .faq-item.active .faq-answer { padding: 0 20px 20px 20px; max-height: 200px; }
+        .faq-item.active i { transform: rotate(180deg); color: var(--color-primario); }
+        .faq-question i { transition: transform 0.3s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo-container">
+                <div class="logo-text">FV <span>DIGITAL</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="info.html">Info</a></li>
+                    <li><a href="cotizacion.html">Cotización</a></li>
+                    <li><a href="soporte.html" class="active">Soporte</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Centro de <span>Soporte</span></h2>
+        <p class="subtitle">Preguntas frecuentes y soporte técnico inmediato de FV DIGITAL</p>
+
+        <div class="faq-item">
+            <div class="faq-question">¿Cuánto tiempo tarda el desarrollo de una web? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Una Landing Page suele estar lista entre 3 a 5 días hábiles, mientras que proyectos más complejos como E-commerce o Sistemas a medida toman de 2 a 4 semanas.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">¿Qué incluye el mantenimiento mensual? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Incluye copias de seguridad semanales, actualizaciones de seguridad, optimización de velocidad y cambios menores en textos o imágenes que requieras de manera urgente.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">¿Cómo se realizan los pagos? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Normalmente trabajamos bajo un esquema de 50% de anticipo al iniciar el diseño y 50% restante al momento de realizar la entrega final y publicación de tu sitio web.</div>
+        </div>
+    </main>
+
+    <script>
+        // Lógica interactiva para desplegar preguntas
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
