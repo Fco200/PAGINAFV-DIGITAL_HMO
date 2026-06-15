@@ -17,9 +17,12 @@
         .logo-text { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
         .logo-text span { color: var(--color-primario); }
 
-        nav ul { display: flex; list-style: none; gap: 20px; }
-        nav ul li a { color: var(--color-gris); text-decoration: none; font-weight: 500; font-size: 15px; }
-        nav ul li a.active { color: var(--color-primario); }
+        .nav-menu { display: flex; list-style: none; gap: 20px; }
+        .nav-menu a { color: var(--color-gris); text-decoration: none; font-weight: 500; font-size: 15px; transition: .3s; }
+        .nav-menu a:hover,
+        .nav-menu a.active { color: var(--color-primario); }
+
+        .menu-toggle { display: none; font-size: 28px; color: white; cursor: pointer; }
 
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
         .info-contacto h2 { font-size: 32px; margin-bottom: 15px; }
@@ -37,6 +40,27 @@
         
         .btn-enviar { width: 100%; padding: 12px; background: var(--color-primario); color: white; border: none; border-radius: 25px; font-weight: 600; font-size: 15px; cursor: pointer; transition: 0.3s; }
         .btn-enviar:hover { background: #005bb5; }
+
+        @media(max-width:768px){
+            .menu-toggle { display: block; }
+            .nav-menu {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: #0a0f1d; flex-direction: column; align-items: center;
+                gap: 0; display: none; padding: 15px 0;
+                border-top: 1px solid rgba(255,255,255,.1);
+            }
+            .nav-menu.active { display: flex; }
+            .nav-menu li { width: 100%; text-align: center; }
+            .nav-menu a { display: block; padding: 15px; }
+            .container { grid-template-columns: 1fr; gap: 30px; }
+            .info-contacto h2 { font-size: 26px; }
+        }
+
+        @media(max-width:480px){
+            body { padding-top: 80px; }
+            .info-contacto h2 { font-size: 22px; }
+            form { padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -45,8 +69,9 @@
             <a href="index.html" class="logo-container">
                 <div class="logo-text">FV <span>DIGITAL</span></div>
             </a>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
             <nav>
-                <ul>
+                <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="info.html">Info</a></li>
                     <li><a href="cotizacion.html">Cotización</a></li>
@@ -81,11 +106,16 @@
     </main>
 
     <script>
+        const toggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.nav-menu');
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
         document.getElementById('form-contacto').addEventListener('submit', function(e) {
             e.preventDefault();
             const nom = document.getElementById('c-nombre').value;
             const msg = document.getElementById('c-mensaje').value;
-            // Abre WhatsApp con el mensaje estructurado de contacto
             const texto = `Hola FV DIGITAL, mi nombre es ${nom}. ${msg}`;
             window.open(`https://api.whatsapp.com/send?phone=526625374491&text=${encodeURIComponent(texto)}`, '_blank');
         });

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FV DIGITAL | Cotizador Profesional Avanzado</title>
-     <link rel="icon" href="fv_digital_logo.png.webp" type="image/png">
+    
+    <link rel="icon" href="fv_digital_logo.png.webp" type="image/webp">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -19,7 +20,9 @@
 
         :root {
             --color-primario: #0071e3; 
+            --color-secundario: #00b4d8;
             --color-oscuro: #0a0f1d;   
+            --color-tarjeta: rgba(255, 255, 255, 0.03);
             --color-texto: #ffffff;
             --color-gris: #b0b3b8;
             --color-exito: #2ecc71;
@@ -28,68 +31,76 @@
         body {
             background-color: var(--color-oscuro);
             color: var(--color-texto);
-            padding-top: 40px;
+            padding-top: 80px; /* Consistente con Index e Info */
+            overflow-x: hidden;
         }
 
-        /* BARRA DE NAVEGACIÓN */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(10, 15, 29, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        /* 📱 BARRA DE NAVEGACIÓN TOTALMENTE RESPONSIVA */
+        header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            background: rgba(10, 15, 29, 0.95); 
+            backdrop-filter: blur(10px); 
+            z-index: 1000; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        
+        .navbar { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+            color: white; 
+            gap: 12px;
+        }
+        
+        .logo-img { height: 40px; width: auto; object-fit: contain; }
+        .logo-text { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+        .logo-text span { color: var(--color-primario); }
+
+        /* Lista de Pestañas en Escritorio */
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { 
+            color: var(--color-gris); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 15px; 
+            transition: color 0.3s;
+        }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primario); }
+
+        /* Botón Menú Hamburguesa Móvil */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1001;
         }
 
-        .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-        }
-
-        .logo-text {
-            font-size: 22px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .logo-text span {
-            color: var(--color-primario);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav ul li a {
-            color: var(--color-gris);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--color-primario);
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
         }
 
         /* SECCIÓN COTIZACIÓN */
         .cotizacion-section {
             padding: 60px 20px;
-            min-height: 100vh;
+            min-height: calc(100vh - 80px);
             display: flex;
             align-items: center;
         }
@@ -124,14 +135,8 @@
             align-items: start;
         }
 
-        @media (max-width: 768px) {
-            .cotizador-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .cotizador-wrapper {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--color-tarjeta);
             padding: 30px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -163,7 +168,7 @@
         }
 
         .precio-vivo {
-            font-size: 36px;
+            font-size: 34px;
             font-weight: bold;
             color: var(--color-exito);
             margin-bottom: 5px;
@@ -171,7 +176,7 @@
         }
 
         .moneda-tag {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--color-gris);
             display: block;
         }
@@ -248,7 +253,7 @@
             text-align: center;
             display: none;
             grid-column: 1 / -1;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--color-tarjeta);
             padding: 40px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -285,20 +290,20 @@
         .btn-email { background-color: #ea4335; color: white; }
         .btn-email:hover { background-color: #d33426; transform: scale(1.03); }
 
-        /* BOTÓN FLOTANTE DE WHATSAPP */
+        /* 💬 WHATSAPP FLOTANTE */
         .whatsapp-flotante {
             position: fixed;
             bottom: 25px;
             right: 25px;
             background-color: #25d366;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 26px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             z-index: 9999;
             transition: all 0.3s ease;
@@ -307,7 +312,6 @@
 
         .whatsapp-flotante:hover {
             transform: scale(1.1) rotate(10deg);
-            background-color: #1ebd59;
         }
 
         @keyframes aparecer {
@@ -315,17 +319,54 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* PLANTILLA DEL PDF */
-        .reporte-plantilla {
-            background: white;
-            color: #333;
-            padding: 40px;
-            font-family: Arial, sans-serif;
+        /* 🛑 TRUCO TÉCNICO: PLANTILLA DEL PDF ESCONDIDA PERO RENDERIZABLE */
+        .pdf-oculto-container {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 100%;
         }
-        .pdf-header { text-align: center; color: #0071e3; margin-bottom: 20px;}
-        .pdf-body p { margin: 12px 0; font-size: 15px; color: #444;}
-        .pdf-total { color: #2ecc71; font-size: 20px; margin-top: 20px; text-align: right;}
-        .pdf-footer { margin-top: 40px; font-size: 11px; color: #777; text-align: center; border-top: 1px solid #ddd; padding-top: 10px;}
+
+        .reporte-plantilla {
+            background: #ffffff;
+            color: #222222;
+            padding: 45px;
+            font-family: Arial, sans-serif;
+            width: 170mm; /* Forzamos tamaño estándar de captura */
+            box-sizing: border-box;
+        }
+        .pdf-header { text-align: center; color: #0071e3; margin-bottom: 25px;}
+        .pdf-header h3 { font-size: 26px; font-weight: bold; margin-bottom: 5px; }
+        .pdf-body p { margin: 15px 0; font-size: 15px; color: #333; border-bottom: 1px dashed #eee; padding-bottom: 8px;}
+        .pdf-total { color: #2ecc71; font-size: 22px; margin-top: 30px; text-align: right; font-weight: bold;}
+        .pdf-footer { margin-top: 50px; font-size: 11px; color: #666; text-align: center; border-top: 1px solid #ddd; padding-top: 15px;}
+
+        /* 📱 REGLAS MEDIA QUERIES RESPONSIVE (MÓVIL) */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .menu-toggle { display: flex; }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(10, 15, 29, 0.98);
+                width: 100%;
+                height: calc(100vh - 70px);
+                text-align: center;
+                padding-top: 30px;
+                gap: 25px;
+                transition: left 0.4s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            nav ul.active { left: 0; }
+            nav ul li a { font-size: 19px; display: block; }
+            
+            .cotizador-grid { grid-template-columns: 1fr; }
+            .contador-box { position: static; margin-top: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -333,15 +374,23 @@
     <header>
         <div class="navbar">
             <a href="index.html" class="logo-container">
+                <img src="fv_digital_logo.png.webp" alt="FV Digital Logo" class="logo-img">
                 <div class="logo-text">FV <span>DIGITAL</span></div>
             </a>
+            
+            <button class="menu-toggle" id="mobile-menu" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav>
-                <ul>
+                <ul id="nav-list">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="info.html">Info</a></li>
-                    <li><a href="cotizacion.html" style="color: var(--color-primario);">Cotización</a></li>
+                    <li><a href="info.html">Servicios</a></li>
+                    <li><a href="portfolio.html">Portafolio</a></li>
+                    <li><a href="cotizacion.html" class="active">Cotización</a></li>
                     <li><a href="soporte.html">Soporte</a></li>
-                    <li><a href="portafolio.html">Portafolio</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
@@ -395,25 +444,6 @@
                 </div>
             </div>
 
-            <div id="reporte-pdf" class="reporte-plantilla" style="display: none;">
-                <div class="pdf-header">
-                    <h3>FV DIGITAL</h3>
-                    <p>Reporte Estimado de Cotización</p>
-                </div>
-                <hr>
-                <div class="pdf-body">
-                    <p><strong>Cliente:</strong> <span id="pdf-nombre"></span></p>
-                    <p><strong>Contacto:</strong> <span id="pdf-email"></span></p>
-                    <p><strong>Proyecto Seleccionado:</strong> <span id="pdf-tipo"></span></p>
-                    <p><strong>Adicionales:</strong> <span id="pdf-extras">Ninguno</span></p>
-                    <hr>
-                    <h4 class="pdf-total">Total Estimado: <span id="pdf-total-num">$0</span> MXN</h4>
-                </div>
-                <div class="pdf-footer">
-                    <p>Este documento es una estimación automatizada por FV DIGITAL. Válido por 30 días.</p>
-                </div>
-            </div>
-
             <div id="mensaje-exito" class="success-box">
                 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
                 <h3>¡Reporte PDF Generado con Éxito!</h3>
@@ -425,6 +455,26 @@
             </div>
         </div>
     </main>
+
+    <div class="pdf-oculto-container">
+        <div id="reporte-pdf" class="reporte-plantilla">
+            <div class="pdf-header">
+                <h3>FV DIGITAL</h3>
+                <p>Reporte Oficial Estimado de Cotización</p>
+            </div>
+            <hr style="border: none; border-top: 2px solid #0071e3; margin-bottom: 20px;">
+            <div class="pdf-body">
+                <p><strong>Cliente / Empresa:</strong> <span id="pdf-nombre"></span></p>
+                <p><strong>Correo Electrónico:</strong> <span id="pdf-email"></span></p>
+                <p><strong>Estructura Solicitada:</strong> <span id="pdf-tipo"></span></p>
+                <p><strong>Integraciones Extra Seleccionadas:</strong> <span id="pdf-extras">Ninguno</span></p>
+                <h4 class="pdf-total">Total Estimado: <span id="pdf-total-num">$0</span> MXN</h4>
+            </div>
+            <div class="pdf-footer">
+                <p>Este documento es un presupuesto digital provisto de manera automatizada por FV DIGITAL. Válido por 30 días.</p>
+            </div>
+        </div>
+    </div>
 
     <a href="https://wa.me/526625374491" class="whatsapp-flotante" target="_blank">
         <i class="fab fa-whatsapp"></i>
@@ -438,6 +488,18 @@
             correo_destino: "Franciscoaguayo2005@gmail.com" 
         };
 
+        // Menú Hamburguesa Responsivo
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            spans[0].style.transform = navList.classList.contains('active') ? 'rotate(45deg) translate(5px, 5px)' : 'none';
+            spans[1].style.opacity = navList.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = navList.classList.contains('active') ? 'rotate(-45deg) translate(6px, -6px)' : 'none';
+        });
+
         const selectWeb = document.getElementById('tipo-web');
         const checkboxes = document.querySelectorAll('.extra');
         const contadorVisual = document.getElementById('contador-visual');
@@ -446,26 +508,21 @@
         // Función matemática para calcular el precio en vivo
         function actualizarPrecioEnVivo() {
             let total = 0;
-            
             if (selectWeb.value !== "") {
                 total += parseFloat(selectWeb.options[selectWeb.selectedIndex].getAttribute('data-precio'));
             }
-
             checkboxes.forEach(cb => {
                 if (cb.checked) {
                     total += parseFloat(cb.getAttribute('data-precio'));
                 }
             });
-
-            // Formatear número a moneda local de manera elegante
             contadorVisual.innerText = `$${total.toLocaleString('es-MX')}`;
         }
 
-        // Detectar cualquier interacción en el formulario
         selectWeb.addEventListener('change', actualizarPrecioEnVivo);
         checkboxes.forEach(cb => cb.addEventListener('change', actualizarPrecioEnVivo));
 
-        // Lógica de Envío y PDF
+        // Evento de Procesamiento y Descarga Real
         formCotizacion.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -485,37 +542,39 @@
 
             const extrasTexto = extrasAgregados.length > 0 ? extrasAgregados.join(', ') : 'Ninguno';
 
+            // Inyectamos los datos en la estructura oculta
             document.getElementById('pdf-nombre').innerText = nombre;
             document.getElementById('pdf-email').innerText = email;
             document.getElementById('pdf-tipo').innerText = tipoWebTexto;
             document.getElementById('pdf-extras').innerText = extrasTexto;
             document.getElementById('pdf-total-num').innerText = `$${total.toLocaleString('es-MX')}`;
 
+            // Captura del nodo con html2pdf (Al estar en coordenadas negativas, tiene display físico real y no sale blanco)
             const elementoPDF = document.getElementById('reporte-pdf');
-            elementoPDF.style.display = 'block';
 
             const opcionesPdf = {
-                margin: 12,
+                margin: 10,
                 filename: `Cotizacion_FV_Digital_${nombre.replace(/\s+/g, '_')}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
+                html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
+            // Ejecutar renderizado
             html2pdf().set(opcionesPdf).from(elementoPDF).save().then(() => {
-                elementoPDF.style.display = 'none';
-                
-                // Ocultar elementos principales
+                // Transición limpia de interfaces
                 document.getElementById('main-title').style.display = 'none';
                 document.getElementById('main-subtitle').style.display = 'none';
                 document.getElementById('main-grid').style.display = 'none';
                 document.getElementById('mensaje-exito').style.display = 'block';
 
-                // Configurar API de mensajería externa
-                const mensajeBase = `¡Hola FV DIGITAL! Acabo de generar mi cotización.\n\n*Cliente:* ${nombre}\n*Proyecto:* ${tipoWebTexto}\n*Total Estimado:* $${total.toLocaleString('es-MX')} MXN\n\nEnvío el PDF generado.`;
+                // API de Enlace Directo Preconfigurada
+                const mensajeBase = `¡Hola FV DIGITAL! Acabo de generar mi cotización automatizada.\n\n*Cliente:* ${nombre}\n*Proyecto:* ${tipoWebTexto}\n*Total Estimado:* $${total.toLocaleString('es-MX')} MXN\n\nAdjunto el archivo PDF que se descargó de su plataforma web.`;
                 
                 document.getElementById('send-whatsapp').setAttribute('href', `https://api.whatsapp.com/send?phone=${CONFIG_FV.whatsapp_telefono}&text=${encodeURIComponent(mensajeBase)}`);
                 document.getElementById('send-email').setAttribute('href', `mailto:${CONFIG_FV.correo_destino}?subject=Nueva Cotización Web - ${nombre}&body=${encodeURIComponent(mensajeBase)}`);
+            }).catch(err => {
+                console.error("Error al generar el documento PDF: ", err);
             });
         });
     </script>

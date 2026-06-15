@@ -17,9 +17,12 @@
         .logo-text { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
         .logo-text span { color: var(--color-primario); }
 
-        nav ul { display: flex; list-style: none; gap: 20px; }
-        nav ul li a { color: var(--color-gris); text-decoration: none; font-weight: 500; font-size: 15px; }
-        nav ul li a.active { color: var(--color-primario); }
+        .nav-menu { display: flex; list-style: none; gap: 20px; }
+        .nav-menu a { color: var(--color-gris); text-decoration: none; font-weight: 500; font-size: 15px; transition: .3s; }
+        .nav-menu a:hover,
+        .nav-menu a.active { color: var(--color-primario); }
+
+        .menu-toggle { display: none; font-size: 28px; color: white; cursor: pointer; }
 
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; text-align: center; }
         h2 { font-size: 36px; margin-bottom: 15px; }
@@ -32,6 +35,27 @@
         .card i { font-size: 40px; color: var(--color-primario); margin-bottom: 20px; }
         .card h3 { font-size: 20px; margin-bottom: 12px; }
         .card p { color: var(--color-gris); font-size: 14px; line-height: 1.6; }
+
+        @media(max-width:768px){
+            .menu-toggle { display: block; }
+            .nav-menu {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: #0a0f1d; flex-direction: column; align-items: center;
+                gap: 0; display: none; padding: 15px 0;
+                border-top: 1px solid rgba(255,255,255,.1);
+            }
+            .nav-menu.active { display: flex; }
+            .nav-menu li { width: 100%; text-align: center; }
+            .nav-menu a { display: block; padding: 15px; }
+            .grid-servicios { grid-template-columns: 1fr; }
+            h2 { font-size: 28px; }
+        }
+
+        @media(max-width:480px){
+            body { padding-top: 80px; }
+            h2 { font-size: 24px; }
+            .intro { font-size: 14px; }
+        }
     </style>
 </head>
 <body>
@@ -40,8 +64,9 @@
             <a href="index.html" class="logo-container">
                 <div class="logo-text">FV <span>DIGITAL</span></div>
             </a>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
             <nav>
-                <ul>
+                <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="info.html" class="active">Info</a></li>
                     <li><a href="cotizacion.html">Cotización</a></li>
@@ -82,5 +107,12 @@
             </div>
         </div>
     </main>
+    <script>
+        const toggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.nav-menu');
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

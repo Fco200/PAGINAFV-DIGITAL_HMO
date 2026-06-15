@@ -1,151 +1,479 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FV DIGITAL | Portafolio de Proyectos</title>
-     <link rel="icon" href="fv_digital_logo.png.webp" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        :root { --color-primario: #0071e3; --color-oscuro: #0a0f1d; --color-texto: #ffffff; --color-gris: #b0b3b8; }
-        body { background-color: var(--color-oscuro); color: var(--color-texto); padding-top: 100px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FV DIGITAL | Portafolio de Proyectos</title>
 
-        header { position: fixed; top: 0; width: 100%; background: rgba(10, 15, 29, 0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .navbar { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo-container { display: flex; align-items: center; text-decoration: none; color: white; }
-        .logo-text { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
-        .logo-text span { color: var(--color-primario); }
+<link rel="icon" href="fv_digital_logo.png.webp" type="image/png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        nav ul { display: flex; list-style: none; gap: 20px; }
-        nav ul li a { color: var(--color-gris); text-decoration: none; font-weight: 500; font-size: 15px; }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-primario); }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        h2 { text-align: center; font-size: 36px; margin-bottom: 10px; }
-        h2 span { color: var(--color-primario); }
-        .subtitle { text-align: center; color: var(--color-gris); margin-bottom: 40px; }
+:root{
+    --color-primario:#0071e3;
+    --color-oscuro:#0a0f1d;
+    --color-texto:#ffffff;
+    --color-gris:#b0b3b8;
+}
 
-        /* BOTONES DE FILTRADO */
-        .filtros-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-        .btn-filtro { padding: 10px 22px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); color: white; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
-        .btn-filtro:hover, .btn-filtro.active { background: var(--color-primario); border-color: var(--color-primario); transform: translateY(-2px); }
+html{
+    scroll-behavior:smooth;
+}
 
-        /* GRID DEL PORTAFOLIO */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .portfolio-item { background: rgba(255, 255, 255, 0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; transition: all 0.4s ease; opacity: 1; transform: scale(1); }
-        
-        /* Simulación de imagen con CSS para que no requieras recursos externos por ahora */
-        .item-image { height: 180px; background: linear-gradient(45deg, #14213d, #0071e3); display: flex; align-items: center; justify-content: center; font-size: 40px; color: rgba(255,255,255,0.2); }
-        .item-info { padding: 25px; }
-        .item-info h3 { font-size: 20px; margin-bottom: 8px; }
-        .item-info p { color: var(--color-gris); font-size: 14px; line-height: 1.5; }
-        
-        /* BOTÓN FLOTANTE DE WHATSAPP */
-        .whatsapp-flotante { position: fixed; bottom: 25px; right: 25px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 9999; transition: all 0.3s ease; text-decoration: none; }
-        .whatsapp-flotante:hover { transform: scale(1.1) rotate(10deg); }
-    </style>
+body{
+    background-color:var(--color-oscuro);
+    color:var(--color-texto);
+    padding-top:90px;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(10,15,29,.95);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo-container{
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+    color:white;
+}
+
+.logo-text{
+    font-size:24px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.logo-text span{
+    color:var(--color-primario);
+}
+
+/* Menú */
+
+.nav-menu{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+.nav-menu a{
+    color:var(--color-gris);
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+    color:var(--color-primario);
+}
+
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    color:white;
+    cursor:pointer;
+}
+
+/* ================= CONTENIDO ================= */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+h2{
+    text-align:center;
+    font-size:clamp(2rem,5vw,3rem);
+    margin-bottom:10px;
+}
+
+h2 span{
+    color:var(--color-primario);
+}
+
+.subtitle{
+    text-align:center;
+    color:var(--color-gris);
+    margin-bottom:40px;
+    font-size:1rem;
+}
+
+/* ================= FILTROS ================= */
+
+.filtros-container{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+}
+
+.btn-filtro{
+    padding:10px 22px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.03);
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-filtro:hover,
+.btn-filtro.active{
+    background:var(--color-primario);
+    border-color:var(--color-primario);
+    transform:translateY(-3px);
+}
+
+/* ================= PORTAFOLIO ================= */
+
+.portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.portfolio-item{
+    background:rgba(255,255,255,.03);
+    border-radius:15px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.4s;
+}
+
+.portfolio-item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 30px rgba(0,113,227,.2);
+}
+
+.item-image{
+    height:220px;
+    background:linear-gradient(135deg,#14213d,#0071e3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:60px;
+    color:rgba(255,255,255,.2);
+}
+
+.item-info{
+    padding:25px;
+}
+
+.item-info h3{
+    margin-bottom:10px;
+    font-size:1.2rem;
+}
+
+.item-info p{
+    color:var(--color-gris);
+    line-height:1.6;
+}
+
+.item-info a{
+    color:var(--color-primario);
+    text-decoration:none;
+}
+
+.item-info a:hover{
+    text-decoration:underline;
+}
+
+/* ================= WHATSAPP ================= */
+
+.whatsapp-flotante{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#25D366;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    text-decoration:none;
+    z-index:9999;
+    box-shadow:0 5px 20px rgba(0,0,0,.4);
+    transition:.3s;
+}
+
+.whatsapp-flotante:hover{
+    transform:scale(1.1);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-menu{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background:#0a0f1d;
+        flex-direction:column;
+        align-items:center;
+        gap:0;
+        display:none;
+        padding:15px 0;
+        border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    .nav-menu.active{
+        display:flex;
+    }
+
+    .nav-menu li{
+        width:100%;
+        text-align:center;
+    }
+
+    .nav-menu a{
+        display:block;
+        padding:15px;
+    }
+
+    .portfolio-grid{
+        grid-template-columns:1fr;
+    }
+
+    .item-image{
+        height:180px;
+        font-size:50px;
+    }
+
+    .item-info{
+        padding:20px;
+    }
+
+    .whatsapp-flotante{
+        width:55px;
+        height:55px;
+        font-size:28px;
+    }
+}
+
+@media(max-width:480px){
+
+    body{
+        padding-top:80px;
+    }
+
+    h2{
+        font-size:2rem;
+    }
+
+    .subtitle{
+        font-size:.9rem;
+    }
+
+    .btn-filtro{
+        width:100%;
+        max-width:250px;
+    }
+
+    .portfolio-grid{
+        gap:20px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <div class="navbar">
-            <a href="index.html" class="logo-container">
-                <div class="logo-text">FV <span>DIGITAL</span></div>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="info.html">Info</a></li>
-                    <li><a href="portfolio.html" class="active">Portafolio</a></li>
-                    <li><a href="cotizacion.html">Cotización</a></li>
-                    <li><a href="soporte.html">Soporte</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header>
+    <div class="navbar">
 
-    <main class="container">
-        <h2>Casos de <span>Éxito</span></h2>
-        <p class="subtitle">Explora los últimos proyectos desarrollados por FV DIGITAL</p>
+        <a href="index.html" class="logo-container">
+            <div class="logo-text">
+                FV <span>DIGITAL</span>
+            </div>
+        </a>
 
-        <div class="filtros-container">
-            <button class="btn-filtro active" data-filter="all">Ver Todo</button>
-            <button class="btn-filtro" data-filter="landing">Landings</button>
-            <button class="btn-filtro" data-filter="ecommerce">E-commerce</button>
-            <button class="btn-filtro" data-filter="sistema">Sistemas</button>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
         </div>
 
-        <div class="portfolio-grid">
-            <div class="portfolio-item" data-category="landing">
-                <div class="item-image"><i class="fas fa-rocket"></i></div>
-                <div class="item-info">
-                    <h3>Landing Page Pro</h3>
-                    <p>Página de aterrizaje optimizada para campañas de alta conversión en Facebook Ads.</p>
-                </div>
-            </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="info.html">Info</a></li>
+                <li><a href="portfolio.html" class="active">Portafolio</a></li>
+                <li><a href="cotizacion.html">Cotización</a></li>
+                <li><a href="soporte.html">Soporte</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                li><a href="servicios.html">Servicios</a></li>
+            </ul>
+        </nav>
 
-            <div class="portfolio-item" data-category="ecommerce">
-                <div class="item-image"><i class="fas fa-shopping-cart"></i></div>
-                <div class="item-info">
-                    <h3>Store Virtual MX</h3>
-                    <p>Tienda en línea completa con pasarela de pagos integrada y control de inventarios.</p>
-                </div>
-            </div>
+    </div>
+</header>
 
-            <div class="portfolio-item" data-category="sistema">
-                <div class="item-image"><i class="fas fa-layer-group"></i></div>
-                <div class="item-info">
-                    <h3>CRM Empresarial</h3>
-                    <p>Panel de administración a medida para control de métricas y seguimiento de clientes.</p>
-                </div>
+<main class="container">
+
+    <h2>Casos de <span>Éxito</span></h2>
+
+    <p class="subtitle">
+        Explora los últimos proyectos desarrollados por FV DIGITAL
+    </p>
+
+    <div class="filtros-container">
+        <button class="btn-filtro active" data-filter="all">Ver Todo</button>
+        <button class="btn-filtro" data-filter="landing">Landings</button>
+        <button class="btn-filtro" data-filter="ecommerce">E-commerce</button>
+        <button class="btn-filtro" data-filter="sistema">Sistemas</button>
+    </div>
+
+    <div class="portfolio-grid">
+
+        <div class="portfolio-item" data-category="landing">
+            <div class="item-image">
+                <i class="fas fa-rocket"></i>
             </div>
-            <div class="portfolio-item" data-category="landing">
-                <div class="item-image"><i class="fas fa-rocket"></i></div>
-                <div class="item-info">
-                    <h3> PAGINA PARA ORGANIZADOR DE TORNEOS DEPORTIVOS - AVL SPORTS ALL LEAGUES</h3>
-                    <p>Plataforma web para la organización y gestión de torneos deportivos. Complete con funcionalidades para registro de participantes, gestión de resultados y comunicación con los usuarios.
-                        ingresa aqui para entrar a la pagina: <a href="https://slowpitchley57-jpg.github.io/Ley57/index.html" target="_blank" style="color: var(--color-primario); text-decoration: none;">avlsportsallleagues.com</a>
-                    </p>
-                </div>
+            <div class="item-info">
+                <h3>Landing Page Pro</h3>
+                <p>Página de aterrizaje optimizada para campañas de alta conversión.</p>
             </div>
         </div>
-    </main>
 
-    <a href="https://wa.me/526625374491" class="whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <div class="portfolio-item" data-category="ecommerce">
+            <div class="item-image">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="item-info">
+                <h3>Store Virtual MX</h3>
+                <p>Tienda en línea completa con pasarela de pagos integrada.</p>
+            </div>
+        </div>
 
-    <script>
-        const filtros = document.querySelectorAll('.btn-filtro');
-        const items = document.querySelectorAll('.portfolio-item');
+        <div class="portfolio-item" data-category="sistema">
+            <div class="item-image">
+                <i class="fas fa-layer-group"></i>
+            </div>
+            <div class="item-info">
+                <h3>CRM Empresarial</h3>
+                <p>Panel de administración para seguimiento de clientes y métricas.</p>
+            </div>
+        </div>
 
-        filtros.forEach(boton => {
-            boton.addEventListener('click', () => {
-                // Alternar clase activa en los botones
-                document.querySelector('.btn-filtro.active').classList.remove('active');
-                boton.classList.add('active');
+        <div class="portfolio-item" data-category="landing">
+            <div class="item-image">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="item-info">
+                <h3>AVL SPORTS ALL LEAGUES</h3>
 
-                const categoriaFiltro = boton.getAttribute('data-filter');
+                <p>
+                    Plataforma web para organización de torneos deportivos,
+                    gestión de equipos, resultados y estadísticas.
+                </p>
 
-                // Mostrar u ocultar elementos con transiciones limpias
-                items.forEach(item => {
-                    const categoriaItem = item.getAttribute('data-category');
-                    if (categoriaFiltro === 'all' || categoriaFiltro === categoriaItem) {
-                        item.style.display = 'block';
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.9)';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
+                <br>
+
+                <a href="https://slowpitchley57-jpg.github.io/Ley57/index.html" target="_blank">
+                    Visitar Proyecto
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<a href="https://wa.me/526625374491" class="whatsapp-flotante" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+
+/* MENÚ RESPONSIVE */
+
+const toggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.nav-menu');
+
+toggle.addEventListener('click', () => {
+    menu.classList.toggle('active');
+});
+
+/* FILTROS */
+
+const filtros = document.querySelectorAll('.btn-filtro');
+const items = document.querySelectorAll('.portfolio-item');
+
+filtros.forEach(boton => {
+
+    boton.addEventListener('click', () => {
+
+        document.querySelector('.btn-filtro.active')
+        .classList.remove('active');
+
+        boton.classList.add('active');
+
+        const filtro = boton.dataset.filter;
+
+        items.forEach(item => {
+
+            const categoria = item.dataset.category;
+
+            if(filtro === 'all' || filtro === categoria){
+
+                item.style.display = 'block';
+
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                },100);
+
+            }else{
+
+                item.style.opacity = '0';
+                item.style.transform = 'scale(.9)';
+
+                setTimeout(() => {
+                    item.style.display = 'none';
+                },300);
+
+            }
+
         });
-    </script>
+
+    });
+
+});
+
+</script>
+
 </body>
 </html>
