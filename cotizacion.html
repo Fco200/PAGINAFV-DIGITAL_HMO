@@ -319,27 +319,82 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 🛑 TRUCO TÉCNICO: PLANTILLA DEL PDF ESCONDIDA PERO RENDERIZABLE */
-        .pdf-oculto-container {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-            width: 100%;
+        /* PLANTILLA PDF - se clona en tiempo real para evitar renderizado en blanco */
+        #reporte-pdf {
+            display: none;
         }
 
         .reporte-plantilla {
             background: #ffffff;
             color: #222222;
-            padding: 45px;
-            font-family: Arial, sans-serif;
-            width: 170mm; /* Forzamos tamaño estándar de captura */
+            padding: 40px 45px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            width: 170mm;
+            min-height: 257mm;
             box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
         }
-        .pdf-header { text-align: center; color: #0071e3; margin-bottom: 25px;}
-        .pdf-header h3 { font-size: 26px; font-weight: bold; margin-bottom: 5px; }
-        .pdf-body p { margin: 15px 0; font-size: 15px; color: #333; border-bottom: 1px dashed #eee; padding-bottom: 8px;}
-        .pdf-total { color: #2ecc71; font-size: 22px; margin-top: 30px; text-align: right; font-weight: bold;}
-        .pdf-footer { margin-top: 50px; font-size: 11px; color: #666; text-align: center; border-top: 1px solid #ddd; padding-top: 15px;}
+        .reporte-plantilla .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-35deg);
+            font-size: 65px;
+            font-weight: bold;
+            color: rgba(0, 113, 227, 0.07);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            user-select: none;
+        }
+        .reporte-plantilla > *:not(.watermark) { position: relative; z-index: 1; }
+        .pdf-header {
+            text-align: center;
+            color: #0071e3;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #0071e3;
+            padding-bottom: 15px;
+        }
+        .pdf-header h3 { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
+        .pdf-header p { font-size: 14px; color: #555; margin-top: 6px; }
+        .pdf-body { padding: 10px 0; }
+        .pdf-body p {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+            border-bottom: 1px dashed #e0e0e0;
+            padding: 14px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pdf-body p strong { color: #111; min-width: 180px; }
+        .pdf-body p span { color: #444; text-align: right; font-weight: 500; }
+        .pdf-total {
+            color: #2ecc71;
+            font-size: 22px;
+            margin-top: 30px;
+            text-align: right;
+            font-weight: bold;
+            background: #f0faf3;
+            padding: 16px 20px !important;
+            border-radius: 8px;
+            border: 2px solid #2ecc71 !important;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        .pdf-footer {
+            margin-top: 45px;
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+            border-top: 2px solid #e0e0e0;
+            padding-top: 18px;
+        }
+        .pdf-footer p { margin: 3px 0; }
 
         /* 📱 REGLAS MEDIA QUERIES RESPONSIVE (MÓVIL) */
         @media (max-width: 768px) {
@@ -456,23 +511,23 @@
         </div>
     </main>
 
-    <div class="pdf-oculto-container">
-        <div id="reporte-pdf" class="reporte-plantilla">
-            <div class="pdf-header">
-                <h3>FV DIGITAL</h3>
-                <p>Reporte Oficial Estimado de Cotización</p>
-            </div>
-            <hr style="border: none; border-top: 2px solid #0071e3; margin-bottom: 20px;">
-            <div class="pdf-body">
-                <p><strong>Cliente / Empresa:</strong> <span id="pdf-nombre"></span></p>
-                <p><strong>Correo Electrónico:</strong> <span id="pdf-email"></span></p>
-                <p><strong>Estructura Solicitada:</strong> <span id="pdf-tipo"></span></p>
-                <p><strong>Integraciones Extra Seleccionadas:</strong> <span id="pdf-extras">Ninguno</span></p>
-                <h4 class="pdf-total">Total Estimado: <span id="pdf-total-num">$0</span> MXN</h4>
-            </div>
-            <div class="pdf-footer">
-                <p>Este documento es un presupuesto digital provisto de manera automatizada por FV DIGITAL. Válido por 30 días.</p>
-            </div>
+    <div id="reporte-pdf" class="reporte-plantilla">
+        <div class="watermark">FV DIGITAL HMO</div>
+        <div class="pdf-header">
+            <h3>FV DIGITAL</h3>
+            <p>Reporte Oficial de Cotización</p>
+        </div>
+        <div class="pdf-body">
+            <p><strong>Cliente:</strong> <span id="pdf-nombre"></span></p>
+            <p><strong>Correo:</strong> <span id="pdf-email"></span></p>
+            <p><strong>Proyecto:</strong> <span id="pdf-tipo"></span></p>
+            <p><strong>Extras:</strong> <span id="pdf-extras">Ninguno</span></p>
+            <p><strong>Fecha:</strong> <span id="pdf-fecha"></span></p>
+            <p class="pdf-total">Total: <span id="pdf-total-num">$0</span> MXN</p>
+        </div>
+        <div class="pdf-footer">
+            <p>Este documento es un presupuesto digital emitido por FV DIGITAL HMO. Válido por 30 días.</p>
+            <p>Hermosillo, Sonora, México</p>
         </div>
     </div>
 
@@ -542,39 +597,52 @@
 
             const extrasTexto = extrasAgregados.length > 0 ? extrasAgregados.join(', ') : 'Ninguno';
 
-            // Inyectamos los datos en la estructura oculta
+            const fechaActual = new Date().toLocaleDateString('es-MX', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+
+            // Inyectamos los datos en la plantilla oculta
             document.getElementById('pdf-nombre').innerText = nombre;
             document.getElementById('pdf-email').innerText = email;
             document.getElementById('pdf-tipo').innerText = tipoWebTexto;
             document.getElementById('pdf-extras').innerText = extrasTexto;
+            document.getElementById('pdf-fecha').innerText = fechaActual;
             document.getElementById('pdf-total-num').innerText = `$${total.toLocaleString('es-MX')}`;
 
-            // Captura del nodo con html2pdf (Al estar en coordenadas negativas, tiene display físico real y no sale blanco)
-            const elementoPDF = document.getElementById('reporte-pdf');
+            // Clonamos la plantilla (display:none) para renderizar desde un nodo visible
+            const plantilla = document.getElementById('reporte-pdf');
+            const clon = plantilla.cloneNode(true);
+            clon.style.display = 'block';
+            clon.style.position = 'fixed';
+            clon.style.left = '0';
+            clon.style.top = '0';
+            clon.style.zIndex = '-1';
+            clon.style.opacity = '0';
+            clon.style.pointerEvents = 'none';
+            document.body.appendChild(clon);
 
             const opcionesPdf = {
-                margin: 10,
+                margin: [5, 5, 5, 5],
                 filename: `Cotizacion_FV_Digital_${nombre.replace(/\s+/g, '_')}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // Ejecutar renderizado
-            html2pdf().set(opcionesPdf).from(elementoPDF).save().then(() => {
-                // Transición limpia de interfaces
+            html2pdf().set(opcionesPdf).from(clon).save().then(() => {
+                if (clon.parentNode) document.body.removeChild(clon);
                 document.getElementById('main-title').style.display = 'none';
                 document.getElementById('main-subtitle').style.display = 'none';
                 document.getElementById('main-grid').style.display = 'none';
                 document.getElementById('mensaje-exito').style.display = 'block';
 
-                // API de Enlace Directo Preconfigurada
-                const mensajeBase = `¡Hola FV DIGITAL! Acabo de generar mi cotización automatizada.\n\n*Cliente:* ${nombre}\n*Proyecto:* ${tipoWebTexto}\n*Total Estimado:* $${total.toLocaleString('es-MX')} MXN\n\nAdjunto el archivo PDF que se descargó de su plataforma web.`;
+                const mensajeBase = `¡Hola FV DIGITAL! Acabo de generar mi cotización.\n\n*Cliente:* ${nombre}\n*Proyecto:* ${tipoWebTexto}\n*Total:* $${total.toLocaleString('es-MX')} MXN\n\nAdjunto el PDF generado desde su plataforma.`;
                 
                 document.getElementById('send-whatsapp').setAttribute('href', `https://api.whatsapp.com/send?phone=${CONFIG_FV.whatsapp_telefono}&text=${encodeURIComponent(mensajeBase)}`);
-                document.getElementById('send-email').setAttribute('href', `mailto:${CONFIG_FV.correo_destino}?subject=Nueva Cotización Web - ${nombre}&body=${encodeURIComponent(mensajeBase)}`);
+                document.getElementById('send-email').setAttribute('href', `mailto:${CONFIG_FV.correo_destino}?subject=Cotización Web - ${nombre}&body=${encodeURIComponent(mensajeBase)}`);
             }).catch(err => {
-                console.error("Error al generar el documento PDF: ", err);
+                if (clon.parentNode) document.body.removeChild(clon);
+                console.error("Error al generar PDF:", err);
             });
         });
     </script>
