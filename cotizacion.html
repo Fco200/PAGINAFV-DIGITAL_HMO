@@ -494,19 +494,19 @@
                         <label for="tipo-web">Tipo de Proyecto Web</label>
                         <select id="tipo-web" required>
                             <option value="" disabled selected>Selecciona una opción...</option>
-                            <option value="Landing Page" data-precio="3000">Landing Page - $3,000 MXN</option>
-                            <option value="Web Corporativa" data-precio="7000">Web Corporativa - $7,000 MXN</option>
-                            <option value="E-commerce" data-precio="12000">Tienda Online - $12,000 MXN</option>
-                            <option value="Sistema a Medida" data-precio="18000">Aplicación Web - $18,000 MXN</option>
+                            <option value="Landing Page" data-precio="4000">Landing Page - $4,000 MXN</option>
+                            <option value="Web Corporativa" data-precio="7500">Web Corporativa - $7,500 MXN</option>
+                            <option value="E-commerce" data-precio="14000">Tienda Online - $14,000 MXN</option>
+                            <option value="Sistema a Medida" data-precio="21000">Aplicación Web - $21,000 MXN</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Características Adicionales</label>
                         <div class="checkbox-group">
-                            <label><input type="checkbox" class="extra" value="Pasarela de Pagos" data-precio="2000"> Pasarela de Pagos (+$2,000 MXN)</label>
-                            <label><input type="checkbox" class="extra" value="Soporte y Mantenimiento" data-precio="1500"> Soporte y Mantenimiento (+$1,500 MXN)</label>
-                            <label><input type="checkbox" class="extra" value="Optimización SEO Avanzada" data-precio="1200"> Optimización SEO (+$1,200 MXN)</label>
+                            <label><input type="checkbox" class="extra" value="Pasarela de Pagos" data-precio="2500"> Pasarela de Pagos (+$2,500 MXN)</label>
+                            <label><input type="checkbox" class="extra" value="Soporte y Mantenimiento" data-precio="3500"> Soporte y Mantenimiento (+$3,500 MXN)</label>
+                            <label><input type="checkbox" class="extra" value="Optimización SEO Avanzada" data-precio="2000"> Optimización SEO (+$2,000 MXN)</label>
                         </div>
                     </div>
 
@@ -741,7 +741,7 @@
                 document.getElementById('main-grid').style.display = 'none';
                 document.getElementById('mensaje-exito').style.display = 'block';
 
-                const mensajeBase = `¡Hola FV DIGITAL! Acabo de generar mi presupuesto oficial.\n\n*Folio:* ${numeroFolio}\n*Cliente:* ${nombre}\n*Proyecto:* ${tipoWebTexto}\n*Total:* $${total.toLocaleString('es-MX')} MXN\n\nAdjunto el PDF para validar los términos comerciales.`;
+                const mensajeBase = `¡Hola FV DIGITAL! Acabo de generar mi presupuesto oficial.\n\n*cosas extras:*  ${extrasAgregados.join(', ')}\n*Folio:* ${numeroFolio}\n*Cliente:* ${nombre}\n*Proyecto:* ${tipoWebTexto}\n*Total:* $${total.toLocaleString('es-MX')} MXN\n\nAdjunto el PDF para validar los términos comerciales.`;
                 
                 document.getElementById('send-whatsapp').setAttribute('href', `https://api.whatsapp.com/send?phone=${CONFIG_FV.whatsapp_telefono}&text=${encodeURIComponent(mensajeBase)}`);
                 document.getElementById('send-email').setAttribute('href', `mailto:${CONFIG_FV.correo_destino}?subject=Presupuesto Oficial ${numeroFolio} - ${nombre}&body=${encodeURIComponent(mensajeBase)}`);
