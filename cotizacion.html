@@ -218,32 +218,7 @@
             gap: 12px;
             font-size: 14.5px;
         }
-        .btn-primary{
-             width: 100%;
-    background-color: var(--color-primario); /* Tu azul tecnológico oficial */
-    color: #ffffff; /* Texto blanco para un contraste perfecto y legible */
-    padding: 15px;
-    border: none;
-    border-radius: 25px; /* Bordes redondeados elegantes */
-    font-weight: 600;
-    font-size: 16px; /* Equivalente a un tamaño grande/profesional ('large') */
-    cursor:pointer;
-    box-shadow: 0 4px 15px rgba(0, 113, 227, 0.35); /* Sutil resplandor neón azul en la base */
-    transition: all 0.3s ease; /* Suaviza el cambio de tamaño y brillo */
-    margin-top: 10px;
-    margin-bottom: 20px; /* Respeta el espacio hacia abajo que tenías configurado */
-}
-/* Efecto dinámico al pasar el mouse por encima */
-.btn-primary:hover {
-    background-color: #005bb5; /* Un azul un poco más oscuro al presionar */
-    box-shadow: 0 6px 20px rgba(0, 113, 227, 0.5); /* Incrementa el resplandor de luz */
-    transform: translateY(-2px); /* Pequeño efecto de flotación interactiva */
-}
-
-/* Efecto cuando el usuario da clic */
-.btn-primary:active {
-    transform: translateY(0); /* El botón regresa a su posición original al presionarse */
-}
+        
 
         /* CAJA DE ÉXITO */
         .success-box {
@@ -441,7 +416,33 @@
             
             .cotizador-grid { grid-template-columns: 1fr; }
             .contador-box { position: static; margin-top: 10px; }
-        } 
+        }
+        .btn-primary{
+             width: 100%;
+    background-color: var(--color-primario); /* Tu azul tecnológico oficial */
+    color: #ffffff; /* Texto blanco para un contraste perfecto y legible */
+    padding: 15px;
+    border: none;
+    border-radius: 25px; /* Bordes redondeados elegantes */
+    font-weight: 600;
+    font-size: 16px; /* Equivalente a un tamaño grande/profesional ('large') */
+    cursor:pointer;
+    box-shadow: 0 4px 15px rgba(0, 113, 227, 0.35); /* Sutil resplandor neón azul en la base */
+    transition: all 0.3s ease; /* Suaviza el cambio de tamaño y brillo */
+    margin-top: 10px;
+    margin-bottom: 20px; /* Respeta el espacio hacia abajo que tenías configurado */
+}
+/* Efecto dinámico al pasar el mouse por encima */
+.btn-primary:hover {
+    background-color: #005bb5; /* Un azul un poco más oscuro al presionar */
+    box-shadow: 0 6px 20px rgba(0, 113, 227, 0.5); /* Incrementa el resplandor de luz */
+    transform: translateY(-2px); /* Pequeño efecto de flotación interactiva */
+}
+
+/* Efecto cuando el usuario da clic */
+.btn-primary:active {
+    transform: translateY(0); /* El botón regresa a su posición original al presionarse */
+}
     </style>
 </head>
 <body>
@@ -585,11 +586,30 @@
                 </table>
 
                 <div class="pdf-section-title">Cláusulas & Términos del Presupuesto</div>
-                <div class="pdf-legal-notes">
-                    <p>• <strong>Vigencia de Precios:</strong> Este documento representa un desglose preliminar automático válido únicamente por 15 días naturales a partir de la fecha de emisión.</p>
-                    <p style="margin-top: 4px;">• <strong>Esquema de Trabajo:</strong> Todo proyecto requiere de un anticipo equivalente al 50% para dar inicio formal al proceso de desarrollo y calendarización.</p>
-                    <p style="margin-top: 4px;">• <strong>Garantías:</strong> Incluye 20 días de cobertura de soporte técnico post-entrega contra cualquier fallo del código estructurado.</p>
-                </div>
+<div class="pdf-legal-notes">
+    <p>• <strong>Naturaleza Estimatoria:</strong> Este documento representa un desglose preliminar y aproximado basado en los requerimientos iniciales recopilados. Los costos y precios finales pueden variar sustancialmente dependiendo del alcance definitivo, las complejidades técnicas descubiertas y las especificaciones exactas del proyecto.</p>
+    <p style="margin-top: 6px;">• <strong>Esquema de Trabajo y Anticipos:</strong> Todo proyecto requiere obligatoriamente de un anticipo equivalente al 50% del monto total acordado para dar inicio formal al proceso de desarrollo, diseño y calendarización de actividades.</p>
+    <p style="margin-top: 6px;">• <strong>Control de Cambios (Modificaciones):</strong> Cualquier requerimiento, funcionalidad, o ajuste visual solicitado que no se encuentre explícitamente detallado en la propuesta final aceptada será cotizado por separado como un módulo adicional.</p>
+    <p style="margin-top: 6px;">• <strong>Tiempos de Entrega:</strong> Los plazos de desarrollo proporcionados son estimados y están sujetos al cumplimiento oportuno en la entrega de materiales, accesos e información por parte del cliente.</p>
+    <p style="margin-top: 6px;">• <strong>Garantías y Soporte Técnico:</strong> Se incluye una cobertura de garantía de 20 días naturales post-entrega únicamente contra fallos en el código estructurado, enlaces rotos o bugs nativos del sistema desarrollado.</p>
+</div>
+
+<div class="pdf-section-title" style="margin-top: 25px;">Información de Contacto & Soporte</div>
+<div style="background-color: rgba(255, 255, 255, 0.03); border-left: 4px solid var(--color-primario); padding: 15px; border-radius: 4px; margin-top: 10px;">
+    <p style="margin: 0; font-size: 14px; color: var(--color-texto); line-height: 1.6;">
+        Si tienes dudas o deseas proceder con la formalización de esta propuesta para iniciar el desarrollo, por favor comunícate a nuestros canales de atención oficiales:
+    </p>
+    <div style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px;">
+        <div>
+            <p style="margin: 3px 0;">🌐 <strong>Sitio Web:</strong> https://fco200.github.io/PAGINAFV-DIGITAL_HMO/</p>
+            <p style="margin: 3px 0;">📩 <strong>Correo Electrónico:</strong> Franciscoaguayo2005@gmail.com</p>
+        </div>
+        <div>
+            <p style="margin: 3px 0;">📱 <strong>WhatsApp / Tel:</strong> +52 (662) 537-4491</p>
+            <p style="margin: 3px 0;">📍 <strong>Ubicación:</strong> Hermosillo, Sonora, México</p>
+        </div>
+    </div>
+</div>
 
                 <div class="pdf-signatures">
                     <div class="signature-block">
@@ -603,7 +623,7 @@
                         <p><strong>Aceptación de Presupuesto</strong></p>
                         <p>Nombre del Cliente</p>
                         <p>Firma del Cliente o Sello</p>
-                        <p>FECHA</p>
+                        <p>Fecha</p>
                     </div>
                 </div>
             </div>
